@@ -21,6 +21,15 @@ const App = () => {
 
   const getRandomIndex = () => Math.floor(Math.random() * anecdotes.length);
 
+  const [mostVoteIndex, mostVotes] = Object.entries(points).reduce(
+    (acc, curr) => {
+      if (curr[1] > acc[1]) {
+        return curr;
+      }
+      return acc;
+    }
+  );
+
   const handleNext = () => {
     setSelected(getRandomIndex());
   };
@@ -31,11 +40,16 @@ const App = () => {
 
   return (
     <div>
+      <h3>Anecdote of the day</h3>
       <p>{anecdotes[selected]}</p>
       <p>has {points[selected]} vote</p>
 
       <button onClick={handleVote}>vote</button>
       <button onClick={handleNext}>next anecdote</button>
+
+      <h3>Anecdote with most votes</h3>
+      <p>{anecdotes[mostVoteIndex]}</p>
+      <p>has {mostVotes} vote</p>
     </div>
   );
 };
