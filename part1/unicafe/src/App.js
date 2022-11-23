@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 const StatisticLine = ({ text, value }) => {
   return (
-    <p>
-      {text} {value}
-    </p>
+    <tr>
+      <th>{text}</th>
+      <th>{value}</th>
+    </tr>
   );
 };
 
@@ -20,12 +21,16 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <div>
       <h3>statistics</h3>
-      <StatisticLine text="good" value={good} />
-      <StatisticLine text="neutral" value={neutral} />
-      <StatisticLine text="bad" value={bad} />
-      <StatisticLine text="all" value={allFeedbacks} />
-      <StatisticLine text="average" value={averageFeedbacks} />
-      <StatisticLine text="positive" value={positiveFeedbacks} />
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={good} />
+          <StatisticLine text="neutral" value={neutral} />
+          <StatisticLine text="bad" value={bad} />
+          <StatisticLine text="all" value={allFeedbacks} />
+          <StatisticLine text="average" value={averageFeedbacks} />
+          <StatisticLine text="positive" value={positiveFeedbacks} />
+        </tbody>
+      </table>
     </div>
   );
 };
@@ -35,7 +40,6 @@ const Button = ({ text, onClick }) => {
 };
 
 const App = () => {
-  // save clicks of each button to its own state
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
