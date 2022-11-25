@@ -1,6 +1,39 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
+const CityWeather = ({ cityName }) => {
+  const [weather, setWeather] = useState();
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+      )
+      .then((response) => {
+        setWeather(response.data);
+      });
+  }, [cityName]);
+
+  if (!weather) {
+    return <p>Loading Weather</p>;
+  }
+
+  return (
+    <div>
+      <h3>Weather in {cityName}</h3>
+      <p>temperature {weather.main.temp}</p>
+
+      <img
+        src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+        alt="Img weather"
+      />
+      <p>wind {weather.wind.speed}</p>
+    </div>
+  );
+};
+
 const CountryItem = ({ country }) => {
   const [show, setShow] = useState(false);
   return (
@@ -46,6 +79,7 @@ const Countries = ({ countries }) => {
           ))}
         </ul>
         <img src={country.flags.png} alt="Flag" />
+        <CityWeather cityName={country.capital} />
       </div>
     );
   }
