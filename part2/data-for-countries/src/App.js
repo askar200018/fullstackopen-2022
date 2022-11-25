@@ -1,6 +1,32 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+const CountryItem = ({ country }) => {
+  const [show, setShow] = useState(false);
+  return (
+    <div>
+      <li>
+        {country.name.common}{' '}
+        <button onClick={() => setShow(!show)}>{show ? 'hide' : 'show'}</button>
+      </li>
+      {show && (
+        <div>
+          <h2>{country.name.common}</h2>
+          <p>capital {country.capital}</p>
+          <p>area {country.area}</p>
+          <h2>languages:</h2>
+          <ul>
+            {Object.values(country.languages).map((language) => (
+              <li key={language}>{language}</li>
+            ))}
+          </ul>
+          <img src={country.flags.png} alt="Flag" />
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Countries = ({ countries }) => {
   if (countries.length > 10) {
     return <p>Too many matches, specify another filter</p>;
@@ -27,7 +53,7 @@ const Countries = ({ countries }) => {
   return (
     <ul>
       {countries.map((country) => (
-        <li key={country.cca3}>{country.name.common}</li>
+        <CountryItem key={country.cca3} country={country} />
       ))}
     </ul>
   );
