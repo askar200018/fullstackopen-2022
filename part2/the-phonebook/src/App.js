@@ -12,7 +12,6 @@ const App = () => {
 
   useEffect(() => {
     personService.getAll().then((initialPersons) => {
-      console.log({ initialPersons });
       setPersons(initialPersons);
     });
   }, []);
@@ -24,7 +23,6 @@ const App = () => {
   const addNewPerson = (event) => {
     event.preventDefault();
     const isExist = persons.find((person) => person.name === newName);
-    console.log({ isExist });
     if (isExist) {
       alert(`${newName} is already added to phonebook`);
       return;
@@ -43,6 +41,16 @@ const App = () => {
     });
   };
 
+  const deletePerson = (person) => {
+    const result = window.confirm(`Delete ${person.name}?`);
+    console.log({ result });
+    if (result) {
+      personService.remove(person.id).then(() => {
+        setPersons(persons.filter((p) => p.id !== person.id));
+      });
+    }
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -58,7 +66,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons persons={filteredPersons} />
+      <Persons persons={filteredPersons} onDeletePerson={deletePerson} />
     </div>
   );
 };
