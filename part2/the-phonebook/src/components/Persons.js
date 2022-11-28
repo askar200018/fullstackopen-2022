@@ -1,7 +1,7 @@
 const PersonDetail = ({ person, onClickDelete }) => {
   return (
     <li>
-      {person.name} {person.phone}{' '}
+      {person.name} {person.number}{' '}
       <button onClick={onClickDelete}>delete</button>
     </li>
   );

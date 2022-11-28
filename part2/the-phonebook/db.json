@@ -22,8 +22,13 @@
     },
     {
       "name": "test",
-      "phone": "12345",
+      "number": "1111",
       "id": 5
+    },
+    {
+      "name": "new one",
+      "number": "1111",
+      "id": 6
     }
   ]
 }
