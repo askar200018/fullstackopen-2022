@@ -31,12 +31,15 @@ const App = () => {
     }
 
     const newPerson = {
-      id: persons.length + 1,
       name: newName,
       phone: newPhone,
     };
-    setPersons(persons.concat(newPerson));
-    setNewName('');
+
+    axios.post('http://localhost:3001/persons', newPerson).then((response) => {
+      console.log(response.data);
+      setPersons(persons.concat(response.data));
+      setNewName('');
+    });
   };
 
   return (
