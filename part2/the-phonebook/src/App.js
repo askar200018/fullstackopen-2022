@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Filter from './components/Filter';
+import Notification from './components/Notification';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 import personService from './services/persons';
@@ -9,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newPhone, setNewPhone] = useState('');
   const [filter, setFilter] = useState('');
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     personService.getAll().then((initialPersons) => {
@@ -19,6 +21,13 @@ const App = () => {
   const filteredPersons = persons.filter((person) =>
     person.name.toLowerCase().includes(filter.trim().toLowerCase())
   );
+
+  const showSuccessMessage = (message) => {
+    setSuccessMessage(message);
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 2000);
+  };
 
   const updatePerson = (person) => {
     const result = window.confirm(
@@ -32,6 +41,7 @@ const App = () => {
         );
         setNewName('');
         setNewPhone('');
+        showSuccessMessage(`Updated ${returnedPerson.name}`);
       });
     }
   };
@@ -54,6 +64,7 @@ const App = () => {
       setPersons(persons.concat(returnedPerson));
       setNewName('');
       setNewPhone('');
+      showSuccessMessage(`Added ${returnedPerson.name}`);
     });
   };
 
@@ -69,6 +80,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage} />
       <Filter filter={filter} onChange={(e) => setFilter(e.target.value)} />
 
       <h2>add a new</h2>
