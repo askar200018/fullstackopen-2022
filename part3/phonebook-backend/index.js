@@ -82,10 +82,14 @@ app.get('/api/persons/:id', (request, response) => {
 });
 
 app.delete('/api/persons/:id', (request, response) => {
-  const id = +request.params.id;
-  persons = persons.filter((note) => note.id !== id);
-
-  response.status(204).end();
+  Person.findByIdAndRemove(request.params.id)
+    .then(() => {
+      response.status(204).end();
+    })
+    .catch((error) => {
+      console.log(error, error.name);
+      response.status(400).send({ error: 'malformatted id' });
+    });
 });
 
 app.get('/info', (request, response) => {
