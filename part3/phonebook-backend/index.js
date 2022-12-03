@@ -59,30 +59,26 @@ app.post('/api/persons', (request, response) => {
     });
   }
 
-  const isExist = persons.find((person) => person.name === body.name);
-  if (isExist) {
-    return response.status(400).json({
-      error: 'name must be unique',
-    });
-  }
-  const person = {
-    ...body,
-    id: generateId(),
-  };
+  // const isExist = persons.find((person) => person.name === body.name);
+  // if (isExist) {
+  //   return response.status(400).json({
+  //     error: 'name must be unique',
+  //   });
+  // }
 
-  persons = persons.concat(person);
-  response.json(person);
+  const person = new Person({
+    name: body.name,
+    number: body.number,
+  });
+  person.save().then((savedPerson) => {
+    response.json(savedPerson);
+  });
 });
 
 app.get('/api/persons/:id', (request, response) => {
-  const id = +request.params.id;
-  const person = persons.find((person) => person.id === id);
-
-  if (person) {
+  Person.findById(request.params.id).then((person) => {
     response.json(person);
-  } else {
-    response.status(404).end();
-  }
+  });
 });
 
 app.delete('/api/persons/:id', (request, response) => {
