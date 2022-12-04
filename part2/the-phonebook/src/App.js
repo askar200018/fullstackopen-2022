@@ -76,12 +76,18 @@ const App = () => {
       number: newPhone,
     };
 
-    personService.create(newPerson).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
-      setNewName('');
-      setNewPhone('');
-      showSuccessMessage(`Added ${returnedPerson.name}`);
-    });
+    personService
+      .create(newPerson)
+      .then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNewName('');
+        setNewPhone('');
+        showSuccessMessage(`Added ${returnedPerson.name}`);
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.error;
+        showErrorMessage(errorMessage);
+      });
   };
 
   const deletePerson = (person) => {
