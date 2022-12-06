@@ -23,8 +23,33 @@ const favoriteBlog = (blogs) => {
   };
 };
 
+const mostBlogs = (blogs) => {
+  const authors = blogs.reduce((acc, { author }) => {
+    if (Object.prototype.hasOwnProperty.call(acc, author)) {
+      acc[author] += 1;
+    } else {
+      acc[author] = 1;
+    }
+    return acc;
+  }, {});
+
+  const mostBlogs = Object.entries(authors).reduce((acc, [key, value]) => {
+    if (acc === null || value > acc.blogs) {
+      return {
+        author: key,
+        blogs: value,
+      };
+    }
+
+    return acc;
+  }, null);
+
+  return mostBlogs;
+};
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
+  mostBlogs,
 };
