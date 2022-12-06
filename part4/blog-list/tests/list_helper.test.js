@@ -115,7 +115,7 @@ describe('favorite blog', () => {
   });
 });
 
-describe('most blogs', () => {
+describe('author with most blogs', () => {
   test('of empty list is null', () => {
     expect(listHelper.mostBlogs([])).toBe(null);
   });
@@ -136,6 +136,32 @@ describe('most blogs', () => {
       blogs: 3,
     };
     const result = listHelper.mostBlogs(blogs);
+
+    expect(result).toEqual(answer);
+  });
+});
+
+describe('author with most likes', () => {
+  test('of empty list is null', () => {
+    expect(listHelper.mostLikes([])).toBe(null);
+  });
+
+  test('when list has only one blog equals to that', () => {
+    const answer = {
+      author: 'Edsger W. Dijkstra',
+      likes: 5,
+    };
+    const result = listHelper.mostLikes(listWithOneBlog);
+
+    expect(result).toEqual(answer);
+  });
+
+  test('of a bigger list is calculated right', () => {
+    const answer = {
+      author: 'Edsger W. Dijkstra',
+      likes: 17,
+    };
+    const result = listHelper.mostLikes(blogs);
 
     expect(result).toEqual(answer);
   });
