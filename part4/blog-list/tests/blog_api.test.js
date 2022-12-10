@@ -86,7 +86,6 @@ test('a blog without title is not added', async () => {
   await api.post('/api/blogs').send(newBlog).expect(400);
 
   const blogsAtEnd = await helper.blogsInDB();
-  console.log({ blogsAtEnd });
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
 });
 
@@ -101,6 +100,15 @@ test('a blog without url is not added', async () => {
 
   const blogsAtEnd = await helper.blogsInDB();
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
+});
+
+describe('deletion of a blog', () => {
+  test('succeeds with a valid id', async () => {
+    const blogsAtStart = helper.blogsInDB();
+    const blog = blogsAtStart[0];
+
+    await api.delete(`/api/blogs/${blog.id}`).expect(204);
+  });
 });
 
 afterAll(() => {
