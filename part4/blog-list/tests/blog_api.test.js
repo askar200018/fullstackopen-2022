@@ -25,7 +25,6 @@ beforeEach(async () => {
 
   const blogObjects = initialBlogs.map((blog) => new Blog(blog));
   const promiseArray = blogObjects.map((blog) => blog.save());
-
   await Promise.all(promiseArray);
 });
 
@@ -40,6 +39,13 @@ test('should return all blogs', async () => {
   const response = await api.get('/api/blogs');
 
   expect(response.body).toHaveLength(initialBlogs.length);
+});
+
+test('unique identifier id should be defined in blog', async () => {
+  const response = await api.get('/api/blogs');
+  const blog = response.body[0];
+
+  expect(blog.id).toBeDefined();
 });
 
 afterAll(() => {
