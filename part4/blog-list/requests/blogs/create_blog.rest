@@ -1,9 +1,9 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTk3ZjZiNmUzMjBkODZlYzQwNjk1ZSIsInVzZXJuYW1lIjoibWx1dWtrYWkiLCJpYXQiOjE2NzIxMzM3MjV9.kkNoZLp3urG8PtSc8bp2bR5_O6wehNlSTEqNS2UtqBs
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTk3ZjZiNmUzMjBkODZlYzQwNjk1ZSIsInVzZXJuYW1lIjoibWx1dWtrYWkiLCJpYXQiOjE2NzIxMzc3NTV9.VGOQ9zYH6a_NVSaD5r6y2TPf9PVU2z5-Racb5twY_v8
 
 {
-  "title": "VS TOKEN",
+  "title": "VS USER",
   "author": "Someone",
   "url": "url",
   "likes": 2
