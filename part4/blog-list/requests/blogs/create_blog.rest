@@ -1,8 +1,9 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTk3ZjZiNmUzMjBkODZlYzQwNjk1ZSIsInVzZXJuYW1lIjoibWx1dWtrYWkiLCJpYXQiOjE2NzIxMzM3MjV9.kkNoZLp3urG8PtSc8bp2bR5_O6wehNlSTEqNS2UtqBs
 
 {
-  "title": "VS Code",
+  "title": "VS TEST",
   "author": "Someone",
   "url": "url",
   "likes": 2
