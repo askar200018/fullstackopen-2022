@@ -3,7 +3,7 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTk3ZjZiNmUzMjBkODZlYzQwNjk1ZSIsInVzZXJuYW1lIjoibWx1dWtrYWkiLCJpYXQiOjE2NzIxMzM3MjV9.kkNoZLp3urG8PtSc8bp2bR5_O6wehNlSTEqNS2UtqBs
 
 {
-  "title": "VS TEST",
+  "title": "VS TOKEN",
   "author": "Someone",
   "url": "url",
   "likes": 2
